@@ -5,10 +5,10 @@ import {
     SignedOut,
     UserButton
 } from '@clerk/nextjs'
-import WidthLayout from '../components/WidthLayout'
+import WidthLayout from '../WidthLayout'
 import { DarkModeToggle } from '@/components/darkmode-button'
 import { Button } from '@/components/ui/button'
-import { NavMenu } from './NavMenu'
+import { TopNavMenu } from '@/app/components/navigation/topNavMenu/TopNavMenu'
 
 const TopNav = () => {
     return (
@@ -16,7 +16,7 @@ const TopNav = () => {
             <nav className='w-full py-4 flex justify-between border-b'>
                 <div className='text-2xl font-semibold'>Meetings</div>
                 <div>
-                    <NavMenu />
+                    <TopNavMenu />
                 </div>
                 <div>
                     <div className='flex space-x-5'>

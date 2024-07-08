@@ -5,7 +5,7 @@ import { ClerkProvider } from '@clerk/nextjs'
 
 import { GeistSans } from "geist/font/sans";
 import { type Metadata } from "next";
-import TopNav from "./navigation/topnav";
+import TopNav from "./components/navigation/topnav";
 
 import { cn } from "@/lib/utils"
 import { ThemeProvider } from "@/components/theme-provider";
