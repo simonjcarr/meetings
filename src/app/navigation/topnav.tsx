@@ -8,12 +8,16 @@ import {
 import WidthLayout from '../components/WidthLayout'
 import { DarkModeToggle } from '@/components/darkmode-button'
 import { Button } from '@/components/ui/button'
+import { NavMenu } from './NavMenu'
 
 const TopNav = () => {
     return (
         <WidthLayout>
             <nav className='w-full py-4 flex justify-between border-b'>
                 <div className='text-2xl font-semibold'>Meetings</div>
+                <div>
+                    <NavMenu />
+                </div>
                 <div>
                     <div className='flex space-x-5'>
                         <DarkModeToggle />
