@@ -7,6 +7,7 @@ import {
 } from '@clerk/nextjs'
 import WidthLayout from '../components/WidthLayout'
 import { DarkModeToggle } from '@/components/darkmode-button'
+import { Button } from '@/components/ui/button'
 
 const TopNav = () => {
     return (
@@ -16,11 +17,13 @@ const TopNav = () => {
                 <div>
                     <div className='flex space-x-5'>
                         <DarkModeToggle />
-                    <SignedOut>
-                        <SignInButton />
-                    </SignedOut>
-                    <SignedIn>
-                        <UserButton />
+                        <SignedOut>
+                            <SignInButton>
+                                <Button>Sign in</Button>
+                            </SignInButton>
+                        </SignedOut>
+                        <SignedIn>
+                            <UserButton />
                         </SignedIn>
                     </div>
                 </div>
