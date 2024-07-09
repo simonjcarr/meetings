@@ -26,7 +26,7 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <ClerkProvider>
-      <html lang="en" className={`${GeistSans.variable}`}>
+      <html lang="en" suppressHydrationWarning className={`${GeistSans.variable}`}>
         <body className={cn(
           "min-h-screen bg-background font-sans antialiased",
           fontSans.variable
