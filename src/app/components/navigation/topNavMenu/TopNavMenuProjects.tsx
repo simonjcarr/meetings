@@ -60,7 +60,7 @@ export function TopNavMenuProjects() {
         if (key === 0) {
             router.push('/projects')
         } else {
-            router.push(`/projects/${key}`)
+            router.push(`/projects/view/${key}`)
         }
     }
     return (
