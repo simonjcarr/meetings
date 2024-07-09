@@ -19,7 +19,7 @@ export function AddProjectForm() {
 
     return (
         <div>
-            <form action={onSubmit} method="POST" className="space-y-2">
+            <form action={onSubmit} className="space-y-2">
                 <div>
                     <Label htmlFor="name">Name</Label>
                     <Input type="text" name="name" placeholder="Name" />
