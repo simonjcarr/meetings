@@ -8,7 +8,8 @@ import {
   serial,
   timestamp,
   varchar,
-  text
+  text,
+  unique
 } from "drizzle-orm/pg-core";
 
 
@@ -20,27 +21,34 @@ import {
  */
 export const createTable = pgTableCreator((name) => `builddocs_${name}`);
 
+export const users = createTable('user', {
+  id: serial('id').primaryKey(),
+  createdAt: timestamp('created_at', { withTimezone: true }).default(sql`CURRENT_TIMESTAMP`).notNull(),
+  upldatedAt: timestamp('updated_at', { withTimezone: true }).$onUpdate(() => new Date()),
+})
+
 export const projects = createTable('project', {
   id: serial('id').primaryKey(),
   name: varchar('name', { length: 256 }),
   description: text('description'),
   createdAt: timestamp('created_at', { withTimezone: true }).default(sql`CURRENT_TIMESTAMP`).notNull(),
   upldatedAt: timestamp('updated_at', { withTimezone: true }).$onUpdate(() => new Date()),
+}, (table) => {
+  return {
+    nameIdx: index('name_idx').on(table.name)
+  }
 })
 
-export const posts = createTable(
-  "post",
-  {
-    id: serial("id").primaryKey(),
-    name: varchar("name", { length: 256 }),
-    createdAt: timestamp("created_at", { withTimezone: true })
-      .default(sql`CURRENT_TIMESTAMP`)
-      .notNull(),
-    updatedAt: timestamp("updated_at", { withTimezone: true }).$onUpdate(
-      () => new Date()
-    ),
-  },
-  (example) => ({
-    nameIndex: index("name_idx").on(example.name),
-  })
-);
+export const projectUsers = createTable('project_user', {
+  id: serial('id').primaryKey(),
+  projectId: serial('project_id').notNull().references(() => projects.id),
+  userId: serial('user_id').notNull().references(() => users.id),
+  createdAt: timestamp('created_at', { withTimezone: true }).default(sql`CURRENT_TIMESTAMP`).notNull(),
+  upldatedAt: timestamp('updated_at', { withTimezone: true }).$onUpdate(() => new Date()),
+}, (table) => {
+  return {
+    projectIdUserIdIdx: index('project_id_user_id_idx').on(table.projectId, table.userId),
+    projectIdUserIdUnique: unique('project_id_user_id_unique').on(table.projectId, table.userId)
+  }
+})
+
