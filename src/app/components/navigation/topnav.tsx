@@ -16,7 +16,9 @@ const TopNav = () => {
             <nav className='w-full py-4 flex justify-between border-b'>
                 <div className='text-2xl font-semibold'>Meetings</div>
                 <div>
-                    <TopNavMenu />
+                    <SignedIn>
+                        <TopNavMenu />
+                    </SignedIn>
                 </div>
                 <div>
                     <div className='flex space-x-5'>
