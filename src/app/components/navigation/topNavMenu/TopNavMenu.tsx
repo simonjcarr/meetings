@@ -72,15 +72,16 @@ export function TopNavMenu() {
                                     >
                                         <Layers className="h-6 w-6" />
                                         <div className="mb-2 mt-4 text-lg font-medium">
-                                            About Projects
+                                            Projects
                                         </div>
                                         <p className="text-sm leading-tight text-muted-foreground">
                                             Projects let you group related documents.
                                         </p>
+                                        <p className="text-sm leading-tight text-muted-foreground mt-2">Select a favourite or recent proejct or view and manage all your projects in the project dashboard</p>
                                     </a>
                                 </NavigationMenuLink>
                             </li>
-
+                            
                             <TopNavMenuProjects />
 
                             {/* <ListItem href='/docs' title="Favourites" >

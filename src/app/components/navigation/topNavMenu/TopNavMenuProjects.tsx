@@ -1,3 +1,5 @@
+'use client';
+import { useRouter } from "next/navigation"
 import {
     CalendarIcon,
     EnvelopeClosedIcon,
@@ -6,6 +8,8 @@ import {
     PersonIcon,
     RocketIcon,
 } from "@radix-ui/react-icons"
+
+import { Layers, LayersIcon } from "lucide-react"
 
 import {
     Command,
@@ -18,46 +22,85 @@ import {
     CommandShortcut,
 } from "@/components/ui/command"
 
+
+
 export function TopNavMenuProjects() {
+    const favProjects = [
+        {
+            id: 1,
+            name: "Project 1",
+        },
+        {
+            id: 2,
+            name: "Project 2",
+        },
+        {
+            id: 3,
+            name: "Project 3",
+        },
+    ]
+
+    const recentProjects = [
+        {
+            id: 4,
+            name: "Project 4",
+        },
+        {
+            id: 5,
+            name: "Project 5",
+        },
+        {
+            id: 6,
+            name: "Project 6",
+        },
+    ]
+
+    const router = useRouter();
+    const handleClick = (key: number) => {
+        if (key === 0) {
+            router.push('/projects')
+        } else {
+            router.push(`/projects/${key}`)
+        }
+    }
     return (
-        <Command className="rounded-lg border shadow-md">
-            <CommandInput placeholder="Type a command or search..." />
-            <CommandList>
+        
+        <div className="grow">
+
+        <Command className="rounded-lg border shadow-md h-full">
+            
+                <CommandList>
                 <CommandEmpty>No results found.</CommandEmpty>
-                <CommandGroup heading="Suggestions">
-                    <CommandItem>
-                        <CalendarIcon className="mr-2 h-4 w-4" />
-                        <span>Calendar</span>
+                <CommandGroup heading="Dashboard">
+                    <CommandItem onSelect={(() => handleClick(0))}>
+                        <LayersIcon className="mr-2 h-4 w-4" />
+                        <span>Project Dashboard</span>
+                        {/* <CommandShortcut>⌘P</CommandShortcut> */}
                     </CommandItem>
-                    <CommandItem>
-                        <FaceIcon className="mr-2 h-4 w-4" />
-                        <span>Search Emoji</span>
-                    </CommandItem>
-                    <CommandItem>
-                        <RocketIcon className="mr-2 h-4 w-4" />
-                        <span>Launch</span>
-                    </CommandItem>
+                </CommandGroup>
+                <CommandGroup heading={`Favourites (${favProjects.length})`}>
+                    {favProjects.map((project) => (
+                        <CommandItem onSelect={() => handleClick(project.id)} key={project.id}>
+                            {/* <LayersIcon className="mr-2 h-4 w-4" /> */}
+                            <span>{project.name}</span>
+                        </CommandItem>
+                    ))}
+                   
                 </CommandGroup>
                 <CommandSeparator />
-                <CommandGroup heading="Settings">
-                    <CommandItem>
-                        <PersonIcon className="mr-2 h-4 w-4" />
-                        <span>Profile</span>
-                        <CommandShortcut>⌘P</CommandShortcut>
-                    </CommandItem>
-                    <CommandItem>
-                        <EnvelopeClosedIcon className="mr-2 h-4 w-4" />
-                        <span>Mail</span>
-                        <CommandShortcut>⌘B</CommandShortcut>
-                    </CommandItem>
-                    <CommandItem>
-                        <GearIcon className="mr-2 h-4 w-4" />
-                        <span>Settings</span>
-                        <CommandShortcut>⌘S</CommandShortcut>
-                    </CommandItem>
+                <CommandGroup heading={`Recent (${recentProjects.length})`}>
+                    {recentProjects.map((project) => (
+                        <CommandItem onSelect={() => handleClick(project.id)} key={project.id} >
+                            {/* <LayersIcon className="mr-2 h-4 w-4" /> */}
+                            <span>{project.name}</span>
+                        </CommandItem>
+                    ))}
+                    
                 </CommandGroup>
+                
             </CommandList>
         </Command>
+        </div>
     )
 }
 
